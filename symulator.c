@@ -8,7 +8,9 @@
 #include <math.h>
 #include "symulator.h"    //plik ze strukturą zwierzaka
 #include "getch.h"        //odpowiada za zczytywanie znaku i zapamiętywanie go na ekranie pomimo odświeżania ekranu
+#include "grafika.h"
 #include "menu.h"         //drukowanie menu startowego
+
 
 static int dzien = 0;
 static short int wybor = 0;
@@ -24,7 +26,7 @@ void *threadFunc(void *arg){
     {
         sleep(1);
 
-        gowno = getche();
+        wybor = getche();
         if(wybor == '\n') wybor = '\0';
         ++i;
     }
@@ -34,6 +36,8 @@ void *threadFunc(void *arg){
 
 //Główny wątek gry
 int main(void){
+
+    wczytajDoTablicy();
 
     struct Pupil *pies = malloc(sizeof(Pupil));
 
@@ -45,12 +49,15 @@ int main(void){
 
     pthread_create(&pth,NULL,threadFunc,"wejscie");
 
-    while(i < 10000){
+    while(i < 100000){
 
     sleep(1);
 
     system("clear");
     printf("%s... %c\n", pies->imie, wybor);
+
+    //druk = "glowa2";
+    drukuj(dol1);
 
     i++;
     }

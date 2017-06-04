@@ -35,10 +35,13 @@ struct Pupil* stworzPsa(struct Pupil* pies){
 int menu(struct Pupil* pies){
   short int decyzja;
   system("clear");
+  system("clear");
 
+  printf("\n\t\t\t\t\t |||||||||||||||||||\n");
   printf("\n\t\t\t\t\t 1 . [[ Nowa  gra ]]\n");
   printf("\n\t\t\t\t\t 2 . [[ Kontynuuj ]]\n");
   printf("\n\t\t\t\t\t 3 . [[   Wyjdź   ]]\n");
+  printf("\n\t\t\t\t\t |||||||||||||||||||\n");
 
   printf("\n\n\n\n\n");
   printf("\n\t\t\t\t\t   Wybierz opcje: ");
@@ -60,6 +63,6 @@ int menu(struct Pupil* pies){
   }
 
   system("clear");
-  
+
   return 0;
 }

@@ -2,64 +2,97 @@
 
 #include <pthread.h>
 #include <stdio.h>
-#include <time.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
-#include <math.h>
 #include "grafika.h"    //plik ze strukturą zwierzaka
 
-int * wczytajPlik(char * nazwa){
+#define CLEAR(x) memset(x,'\0',sizeof(char) * 50)           //czyści ścieżkę ze starej i robią ją pustą
 
-      int *tab = malloc(44);
+char wczytajPlik(char * sciezka, char * nazwa, char tab[]){
 
-      char c = 0;
+      char c;
       FILE * fp;
-      char * sciezka = NULL;
+
       char * folder = "ASCII_ART/psy/";
-      sciezka = malloc(sizeof(sciezka) * 100);
       strcat(sciezka,folder);
       strcat(sciezka, nazwa);
       strcat(sciezka,".txt");
       fp = fopen(sciezka,"r");
 
+//      printf("%s\n", sciezka);
+
       int k = 0;
 
-      if (fp != NULL) {
-        while ((c = getc(fp)) != EOF)
-        tab[k] = c;
-        k++;
+      if (fp != NULL){
+        while ((c = getc(fp)) != EOF){
+          tab[k] = c;
+          k++;
+        }
       }
       fclose(fp);
 
-    free(nazwa);
-    free(sciezka);
-
-
-    return tab;
+//     for(int p=0; p<53; p++) printf("%c", tab[p]);
+//     sleep(3);
+    return *tab;
 }
 
-void wczytajDoTablicy(){
+void wczytajDoTablic(){
 
-  char *s1 = "dol1";
-  char *wynik;
-  wynik = (char *)wczytajPlik(s1);
-  for(int k=0; k<44; k++) printf("%c", wynik[k]);
-/*  dol2[44] = wczytajPlik("dol2");
-  dol3[44] = wczytajPlik("dol3");
+  char * sciezka = NULL;
+  sciezka = malloc(sizeof(int) * 50);
 
-  glowa1[44] = wczytajPlik(glowa1);
-  glowa2[44] = wczytajPlik(glowa2);
-  glowa3[44] = wczytajPlik(glowa3);
-*/
- free(wynik);
+  dol1 = malloc(sizeof(char) * 53);
+  dol2 = malloc(sizeof(char) * 53);
+  dol3 = malloc(sizeof(char) * 53);
+
+  glowa1 = malloc(sizeof(char) * 70);
+  glowa2 = malloc(sizeof(char) * 70);
+  glowa3 = malloc(sizeof(char) * 70);
+
+  char *plik = malloc(sizeof(char) * 6);
+
+  plik = "dol1";
+  *dol1 = wczytajPlik(sciezka, plik, dol1);
+  CLEAR(sciezka);
+
+  plik = "dol2";
+  *dol2 = wczytajPlik(sciezka, plik, dol2);
+  CLEAR(sciezka);
+
+  plik = "dol3";
+  *dol3 = wczytajPlik(sciezka, plik, dol3);
+  CLEAR(sciezka);
+
+  plik = "glowa1";
+  *glowa1 = wczytajPlik(sciezka, plik, glowa1);
+  CLEAR(sciezka);
+
+  plik = "glowa2";
+  *glowa2 = wczytajPlik(sciezka, plik, glowa2);
+  CLEAR(sciezka);
+
+  plik = "glowa3";
+  *glowa3 = wczytajPlik(sciezka, plik, glowa3);
+  CLEAR(sciezka);
+
+  plik = NULL;
+
+  free(plik);
+  free(sciezka);
+
   return;
 }
 
-void drukuj(char stan[]){
+void drukuj(int warunek){
 
-  for(int k=0; k<44; k++) printf("%c", stan[k]);
-
-  free(stan);
+if(warunek == 1){
+  for(int z=0; z<70; z++){
+    printf("%c", glowa1[z]);
+  }
+  for(int z=0; z<53; z++){
+    printf("%c", dol1[z]);
+  }
+}
   return;
 }

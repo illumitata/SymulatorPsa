@@ -8,9 +8,9 @@
 #include <math.h>
 #include "symulator.h"    //plik ze strukturą zwierzaka
 #include "getch.h"        //odpowiada za zczytywanie znaku i zapamiętywanie go na ekranie pomimo odświeżania ekranu
-#include "grafika.h"
+#include "grafika.h"      //wczytanie grafik do pamięci, ich alokacja, oraz drukowanie na podstawie logik
 #include "menu.h"         //drukowanie menu startowego
-
+#include "logika.h"       //logika całej gry, zestaw warunków
 
 static int dzien = 0;
 static short int wybor = 0;
@@ -37,7 +37,7 @@ void *threadFunc(void *arg){
 //Główny wątek gry
 int main(void){
 
-    wczytajDoTablicy();
+    wczytajDoTablic();
 
     struct Pupil *pies = malloc(sizeof(Pupil));
 
@@ -57,8 +57,12 @@ int main(void){
     printf("%s... %c\n", pies->imie, wybor);
 
     //druk = "glowa2";
-    drukuj(dol1);
-
+    drukuj(1);
+    /*Dlaczego tak a nie przywołując tablice?
+      po pierwsze wyżej będzie funckja sprawdzająca życie psa i ustalająca warunki
+      więc wysłanie sygnału do "świata" druku wydaje się zdecydowanie lepszym rozwiązaniem.
+      dzięki temu nie trzeba tak wiele linkować, omijamy tonę niepotrzebnej zabawy
+    */
     i++;
     }
 

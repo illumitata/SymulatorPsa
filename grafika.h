@@ -8,17 +8,16 @@
 #include <unistd.h>
 #include "grafika.h"
 
-static char dol1[44];
-static char dol2[44];
-static char dol3[44];
+static char *dol1;
+static char *dol2;
+static char *dol3;
 
-static char glowa1[44];
-static char glowa2[44];
-static char glowa3[44];
+static char *glowa1;
+static char *glowa2;
+static char *glowa3;
 
+void wczytajDoTablic();
 
-void wczytajDoTablicy();
-
-void drukuj(char stan[]);
+void drukuj(int warunek);
 
 #endif /* GRAFIKA_H*/

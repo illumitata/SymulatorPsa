@@ -13,7 +13,9 @@
 #include "logika.h"       //logika całej gry, zestaw warunków
 
 static int dzien = 0;
-static short int wybor = 0;
+static char wybor = 0;
+static char starywybor = 0;
+static int sygnal = 0;
 
 //Wątek odpowiadający za czytanie z klawiatury
 void *threadFunc(void *arg){
@@ -24,10 +26,19 @@ void *threadFunc(void *arg){
 
     while(i < 110000 )
     {
-        sleep(1);
+        usleep(100000);
+
+        if(wybor != '\0') starywybor = wybor;
 
         wybor = getche();
-        if(wybor == '\n') wybor = '\0';
+        //printf("%c\n", wybor);
+        //sleep(1);
+
+        if(wybor==10) sygnal = 1;          //teraz wysyła sygnał czyli i potem od razu zeruje, bo eneter nie leży od 48 do57
+        //printf("%c\n", wybor);
+        //sleep(1);
+        if(!(wybor>48 && wybor<57)) wybor = '\0';     //wybór leży tylko miedzy danymi w menu inaczej "\0"
+                                                      //(!!!)dopracować oraz po naciśnięciu entera dopiero wysyłał sygnał
         ++i;
     }
 
@@ -54,10 +65,16 @@ int main(void){
 
     while(i < 100000){
 
-    sleep(1);
+    usleep(100000);
 
     system("clear");
     printf("%s... %c\n", pies->imie, wybor);
+    printf("%d\n", pies->glod);
+
+    if(sygnal==1){
+      if(starywybor==49) pies->glod = pies->glod - 10;
+      sygnal = 0;
+    }
 
     warunek = sprawdzStan(pies);
     if(warunek == 0) break; //drukuj ekran przegranej i break z pętli

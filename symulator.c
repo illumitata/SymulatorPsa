@@ -24,11 +24,11 @@ void *threadFunc(void *arg){
     //int gowno;
     str=(char*)arg;
 
-    while(i < 110000 )
+    while(1)
     {
         usleep(100000);
 
-        if(wybor != '\0') starywybor = wybor;
+        if(wybor != '\0') starywybor = wybor;       //WAŻNA KOLEJNOŚĆ TYCH KOMEND
 
         wybor = getche();
         //printf("%c\n", wybor);
@@ -74,6 +74,7 @@ int main(void){
     if(sygnal==1){
       if(starywybor==49) pies->glod = pies->glod - 10;
       sygnal = 0;
+      starywybor = '\0';                //rozwiązuje problem kiedy wciskamy enter kilka razy
     }
 
     warunek = sprawdzStan(pies);

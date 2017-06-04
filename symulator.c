@@ -59,9 +59,9 @@ int main(void){
     system("clear");
     printf("%s... %c\n", pies->imie, wybor);
 
-    //druk = "glowa2";
     warunek = sprawdzStan(pies);
-    drukuj(warunek);
+    if(warunek == 0) break; //drukuj ekran przegranej i break z pętli
+    else drukuj(warunek);
     /*Dlaczego tak a nie przywołując tablice?
       po pierwsze wyżej będzie funckja sprawdzająca życie psa i ustalająca warunki
       więc wysłanie sygnału do "świata" druku wydaje się zdecydowanie lepszym rozwiązaniem.

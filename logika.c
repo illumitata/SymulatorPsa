@@ -17,8 +17,7 @@ pies->zado = 100;
 
 int sprawdzStan(struct Pupil* pies){
 
-  int stan = 0;
-
+  if(pies->glod<=0 || pies->prag<=0 || pies->glod<=0 || pies->zado<=0) stan = 0; //przegrana
   if(pies->glod>=70 || pies->zdro>=70) stan = 1;
 
   return stan;

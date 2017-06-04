@@ -10,6 +10,8 @@
 #include "symulator.h"
 #include "logika.h"
 
+int stan;
+
 int sprawdzStan(struct Pupil* pies);
 
 #endif /* LOGIKA_H*/

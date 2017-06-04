@@ -84,15 +84,29 @@ void wczytajDoTablic(){
   return;
 }
 
+void drukujGlowe(char tab[]){
+
+  for(int k=0; k<70; k++){
+    printf("%c", tab[k]);
+  }
+
+  return;
+}
+
+void drukujDol(char tab[]){
+
+  for(int k=0; k<53; k++){
+    printf("%c", tab[k]);
+  }
+
+  return;
+}
+
 void drukuj(int warunek){
 
 if(warunek == 1){
-  for(int z=0; z<70; z++){
-    printf("%c", glowa1[z]);
-  }
-  for(int z=0; z<53; z++){
-    printf("%c", dol1[z]);
-  }
+  drukujGlowe(glowa2);
+  drukujDol(dol2);
 }
   return;
 }

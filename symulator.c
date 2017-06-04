@@ -9,7 +9,7 @@
 #include "symulator.h"    //plik ze strukturą zwierzaka
 #include "getch.h"        //odpowiada za zczytywanie znaku i zapamiętywanie go na ekranie pomimo odświeżania ekranu
 #include "grafika.h"      //wczytanie grafik do pamięci, ich alokacja, oraz drukowanie na podstawie logik
-#include "menu.h"         //drukowanie menu startowego
+#include "menu.h"         //drukowanie menu startowego i innych statycznych elementów
 #include "logika.h"       //logika całej gry, zestaw warunków
 
 static int dzien = 0;
@@ -45,6 +45,9 @@ int main(void){
 
     pthread_t pth;
     int i = 0;
+
+    int warunek = 0;
+
     fflush(stdin);
 
     pthread_create(&pth,NULL,threadFunc,"wejscie");
@@ -57,7 +60,8 @@ int main(void){
     printf("%s... %c\n", pies->imie, wybor);
 
     //druk = "glowa2";
-    drukuj(1);
+    warunek = sprawdzStan(pies);
+    drukuj(warunek);
     /*Dlaczego tak a nie przywołując tablice?
       po pierwsze wyżej będzie funckja sprawdzająca życie psa i ustalająca warunki
       więc wysłanie sygnału do "świata" druku wydaje się zdecydowanie lepszym rozwiązaniem.

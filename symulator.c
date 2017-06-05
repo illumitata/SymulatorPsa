@@ -83,7 +83,6 @@ int main(void){
         if(komenda==51) dajSpacer(pies);  //wyjdź na spacer - 3
         if(komenda==52) dajWet(pies);     //odwiedź weterynarza - 4
         if(komenda==53){
-                        system("clear");
                         wyjscie = 1;
                         break;
                        }
@@ -132,6 +131,7 @@ int main(void){
       }
     }
 
+    system("clear");
     printf("\n\t\t Wytrzymałeś %d dni i %d godzin.\n", dzien, godzina);
     printf("\n\t (Naciśnij dowolny przycisk, żeby wyjść z gry)\n");
 

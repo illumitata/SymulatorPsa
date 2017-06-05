@@ -89,7 +89,6 @@ int main(void){
                        }
         sygnal = 0;
         komenda = '\0';                   //rozwiązuje problem kiedy wciskamy enter kilka razy
-
       }
 
     warunek = sprawdzStan(pies);

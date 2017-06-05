@@ -29,7 +29,7 @@ char wczytajPlik(char * sciezka, char * nazwa, char tab[]){
         }
       }
       fclose(fp);
-      
+
     return *tab;
 }
 

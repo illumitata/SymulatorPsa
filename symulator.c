@@ -94,7 +94,10 @@ int main(void){
 
     warunek = sprawdzStan(pies);
 
-    if(warunek == 0) break; //drukuj ekran przegranej i break z pętli
+    if(warunek == 0){
+      wyjscie = 1;
+      break; //drukuj ekran przegranej i break z pętli
+    }
     else drukuj(warunek);
     /*Dlaczego tak a nie przywołując tablice?
       po pierwsze wyżej będzie funckja sprawdzająca życie psa i ustalająca warunki
@@ -112,7 +115,7 @@ int main(void){
 
     czas++;
 
-      if(czas%20 == 0){           //czas do zmiennej stałej
+      if(czas%40 == 0){           //czas do zmiennej stałej
         godzina++;
         pies->glod = pies->glod - 5;
         pies->prag = pies->prag - 5;

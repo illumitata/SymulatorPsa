@@ -11,38 +11,37 @@
 #include "grafika.h"      //wczytanie grafik do pamięci, ich alokacja, oraz drukowanie na podstawie logik
 #include "menu.h"         //drukowanie menu startowego i innych statycznych elementów
 #include "logika.h"       //logika całej gry, zestaw warunków
+#include "komendy.h"      //działania na rzecz zwierzaka
 
-static int dzien = 0;
-static char wybor = 0;
-static char starywybor = 0;
-static int sygnal = 0;
+//////////
+static int  wyjscie = 0;
+static char wybor   = 0;
+static char komenda = 0;
+static int  sygnal  = 0;
+
 
 //Wątek odpowiadający za czytanie z klawiatury
 void *threadFunc(void *arg){
+
     char *str;
-    int i = 0;
-    //int gowno;
     str=(char*)arg;
 
-    while(1)
-    {
+    do{
         usleep(100000);
 
-        if(wybor != '\0') starywybor = wybor;       //WAŻNA KOLEJNOŚĆ TYCH KOMEND
+        if(wybor != '\0') komenda = wybor;       //WAŻNA KOLEJNOŚĆ TYCH KOMEND
 
         wybor = getche();
         //printf("%c\n", wybor);
         //sleep(1);
 
         if(wybor==10) sygnal = 1;          //teraz wysyła sygnał czyli i potem od razu zeruje, bo eneter nie leży od 48 do57
-        //printf("%c\n", wybor);
-        //sleep(1);
-        if(!(wybor>48 && wybor<57)) wybor = '\0';     //wybór leży tylko miedzy danymi w menu inaczej "\0"
-                                                      //(!!!)dopracować oraz po naciśnięciu entera dopiero wysyłał sygnał
-        ++i;
-    }
+        if(!(wybor>48 && wybor<54)) wybor = '\0';     //wybór leży tylko miedzy danymi w menu inaczej "\0"
+                                                      //(!!!) oraz po naciśnięciu entera dopiero wysyła sygnał
+    }while(wyjscie<1);
 
     return NULL;
+
 }
 
 //Główny wątek gry
@@ -54,30 +53,47 @@ int main(void){
 
     menu(pies);
 
+    static int dzien = 0;
+    static long long int czas = 0;
+    static int godzina = 0;
+    static int choroba = 0;
+
     pthread_t pth;
-    int i = 0;
 
     int warunek = 0;
 
-    fflush(stdin);
+    fflush(stdin);  //na wszelki wypadek
 
     pthread_create(&pth,NULL,threadFunc,"wejscie");
 
-    while(i < 100000){
+    while(1){
 
-    usleep(100000);
+      usleep(100000);
 
-    system("clear");
-    printf("%s... %c\n", pies->imie, wybor);
-    printf("%d\n", pies->glod);
+      system("clear");
+      printf("%s... Dzień: %d Godzina: %lld\n", pies->imie, dzien, godzina);
+      printf("%d\n", pies->glod);
+      printf("%d\n", pies->prag);
+      printf("%d\n", pies->zado);
+      printf("%d\n", pies->zdro);
 
-    if(sygnal==1){
-      if(starywybor==49) pies->glod = pies->glod - 10;
-      sygnal = 0;
-      starywybor = '\0';                //rozwiązuje problem kiedy wciskamy enter kilka razy
-    }
+      if(sygnal==1){
+        if(komenda==49) dajJesc(pies);    //nakarm - 1
+        if(komenda==50) dajWode(pies);    //daj wodę - 2
+        if(komenda==51) dajSpacer(pies);  //wyjdź na spacer - 3
+        if(komenda==52) dajWet(pies);     //odwiedź weterynarza - 4
+        if(komenda==53){
+                        system("clear");
+                        wyjscie = 1;
+                        break;
+                       }
+        sygnal = 0;
+        komenda = '\0';                   //rozwiązuje problem kiedy wciskamy enter kilka razy
+
+      }
 
     warunek = sprawdzStan(pies);
+
     if(warunek == 0) break; //drukuj ekran przegranej i break z pętli
     else drukuj(warunek);
     /*Dlaczego tak a nie przywołując tablice?
@@ -85,14 +101,40 @@ int main(void){
       więc wysłanie sygnału do "świata" druku wydaje się zdecydowanie lepszym rozwiązaniem.
       dzięki temu nie trzeba tak wiele linkować, omijamy tonę niepotrzebnej zabawy
     */
-    i++;
+
+    menuGry();
+
+    int czynnik = rand();
+    if((czynnik%10000)<1000) choroba = 1;
+    else choroba = 0;
+
+    printf("Twoja czynność: %c\n", wybor);
+
+    czas++;
+
+      if(czas%20 == 0){           //czas do zmiennej stałej
+        godzina++;
+        pies->glod = pies->glod - 5;
+        pies->prag = pies->prag - 5;
+        if(choroba==1){
+          int problem = rand();
+          pies->zdro = pies->zdro - (problem%30);
+        }
+        pies->zado = pies->zado - 10;
+          if(godzina%24==0){
+            czas = 0;
+            godzina = 0;
+            dzien++;
+          }
+      }
     }
 
-    printf("main waiting for thread to terminate...\n");
-    pthread_join(pth,NULL);
+    printf("\n\t\t Wytrzymałeś %d dni i %d godzin.\n", dzien, godzina);
+    printf("\n\t (Naciśnij dowolny przycisk, żeby wyjść z gry)\n");
 
     free(pies);
 
-    exit(1);
+    pthread_join(pth,NULL);
+
     return 0;
 }

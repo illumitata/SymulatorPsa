@@ -40,7 +40,7 @@ char wczytajPlik(char * sciezka, char * nazwa, char tab[]){
 void wczytajDoTablic(){
 
   char * sciezka = NULL;
-  sciezka = malloc(sizeof(int) * 50);
+  sciezka = malloc(sizeof(char) * 50);
 
   dol1 = malloc(sizeof(char) * 53);
   dol2 = malloc(sizeof(char) * 53);
@@ -86,7 +86,7 @@ void wczytajDoTablic(){
 
 void drukujGlowe(char tab[]){
 
-  for(int k=0; k<70; k++){
+  for(int k=0; k<70; k++){          //czy można ulepszyć. printf("%s", tab) musi mieć 0 na końcu
     printf("%c", tab[k]);
   }
 

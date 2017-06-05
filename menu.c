@@ -32,22 +32,31 @@ struct Pupil* stworzPsa(struct Pupil* pies){
     return pies;
 }
 
+void menuGry(){
+
+  puts("Wpisz i zatwierdź enterem:");
+  puts("1 - nakarm zwierzaka.");
+  puts("2 - daj wodę zwierzakowi.");
+  puts("3 - wyjdź na spacer lub pobaw się.");
+  puts("4 - wycieczka do weterynarza lub pielęgnacja.");
+  puts("5 - wyjdź z symulatora.");
+
+}
+
 int menu(struct Pupil* pies){
   short int decyzja;
   system("clear");
   system("clear");
 
-  printf("\n\t\t\t\t\t |||||||||||||||||||\n");
-  printf("\n\t\t\t\t\t 1 . [[ Nowa  gra ]]\n");
-  printf("\n\t\t\t\t\t 2 . [[ Kontynuuj ]]\n");
-  printf("\n\t\t\t\t\t 3 . [[   Wyjdź   ]]\n");
-  printf("\n\t\t\t\t\t |||||||||||||||||||\n");
+  printf("\n\t\t|||||||||||||||||||\n");
+  printf("\n\t\t1 . [[ Nowa  gra ]]\n");
+  printf("\n\t\t2 . [[ Kontynuuj ]]\n");
+  printf("\n\t\t3 . [[   Wyjdź   ]]\n");
+  printf("\n\t\t|||||||||||||||||||\n");
 
-  printf("\n\n\n\n\n");
-  printf("\n\t\t\t\t\t   Wybierz opcje: ");
+  printf("\n\n");
+  printf("\n\t\t Wybierz opcje: ");
   scanf("%hd",&decyzja);
-
-  //    sleep(1);
 
   switch(decyzja){
       case 1:
@@ -56,7 +65,8 @@ int menu(struct Pupil* pies){
       case 2:
           //wczytanie psa
       case 3:
-          exit(1);                      //zabija program
+          free(pies);
+          exit(1);                  //zabija program
           break;
       default:
           menu(pies);

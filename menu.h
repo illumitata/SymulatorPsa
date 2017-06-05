@@ -10,4 +10,6 @@
 
 int menu(struct Pupil* pies);
 
+void menuGry();
+
 #endif /* !MENU_H */

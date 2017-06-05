@@ -12,6 +12,7 @@
 #include "menu.h"         //drukowanie menu startowego i innych statycznych elementów
 #include "logika.h"       //logika całej gry, zestaw warunków
 #include "komendy.h"      //działania na rzecz zwierzaka
+#include "losowanie.h"    //ułatwienie dla ziaren i losowania
 
 //////////
 static int  wyjscie = 0;
@@ -71,7 +72,7 @@ int main(void){
       usleep(100000);
 
       system("clear");
-      printf("%s... Dzień: %d Godzina: %lld\n", pies->imie, dzien, godzina);
+      printf("%s... Dzień: %d Godzina: %d:00\n", pies->imie, dzien, godzina);
       printf("%d\n", pies->glod);
       printf("%d\n", pies->prag);
       printf("%d\n", pies->zado);
@@ -88,7 +89,6 @@ int main(void){
                        }
         sygnal = 0;
         komenda = '\0';                   //rozwiązuje problem kiedy wciskamy enter kilka razy
-
       }
 
     warunek = sprawdzStan(pies);

@@ -100,52 +100,53 @@ void drukujDol(char tab[]){
 
 void drukuj(int warunek){
 
-  if(warunek == 2){
+  if(warunek>=2 && warunek<=4){
     drukujGlowe(glowa2);
-    drukujDol(dol2);
-    return;
-  }
-  if(warunek == 3){
-    drukujGlowe(glowa2);
-    drukujDol(dol3);
-    return;
-  }
-  if(warunek == 4){
-    drukujGlowe(glowa2);
-    drukujDol(dol1);
-    return;
-  }
-  if(warunek == 6){
-    drukujGlowe(glowa3);
-    drukujDol(dol2);
-    return;
-  }
-  if(warunek == 7){
-    drukujGlowe(glowa3);
-    drukujDol(dol3);
-    return;
-  }
-  if(warunek == 8){
-    drukujGlowe(glowa3);
-    drukujDol(dol1);
-    return;
-  }
-  if(warunek == 10){
-    drukujGlowe(glowa1);
-    drukujDol(dol2);
-    return;
-  }
-  if(warunek == 11){
-    drukujGlowe(glowa1);
-    drukujDol(dol3);
-    return;
-  }
-  if(warunek == 12){
-    drukujGlowe(glowa1);
-    drukujDol(dol1);
-    return;
+    if(warunek == 2){
+      drukujDol(dol2);
+      return;
+      }
+    if(warunek == 3){
+      drukujDol(dol3);
+      return;
+    }
+    if(warunek == 4){
+      drukujDol(dol1);
+      return;
+    }
   }
 
+  if(warunek>=6 && warunek<=9){
+    drukujGlowe(glowa3);
+    if(warunek == 6){
+      drukujDol(dol2);
+      return;
+    }
+    if(warunek == 7){
+      drukujDol(dol3);
+      return;
+    }
+    if(warunek == 8){
+      drukujDol(dol1);
+      return;
+    }
+  }
 
-  return;
+  if(warunek>=10 && warunek<=12){
+    drukujGlowe(glowa1);
+    if(warunek == 10){
+      drukujDol(dol2);
+      return;
+    }
+    if(warunek == 11){
+      drukujDol(dol3);
+      return;
+    }
+    if(warunek == 12){
+      drukujDol(dol1);
+      return;
+    }
+  }
+
+return;
 }

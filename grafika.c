@@ -11,7 +11,7 @@
 
 char wczytajPlik(char * sciezka, char * nazwa, char tab[]){
 
-      char c;
+      char c; //zmienna
       FILE * fp;
 
       char * folder = "ASCII_ART/psy/";
@@ -29,7 +29,7 @@ char wczytajPlik(char * sciezka, char * nazwa, char tab[]){
         }
       }
       fclose(fp);
-      
+
     return *tab;
 }
 

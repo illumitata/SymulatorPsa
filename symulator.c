@@ -71,7 +71,7 @@ int main(void){
       usleep(100000);
 
       system("clear");
-      printf("%s... Dzień: %d Godzina: %lld\n", pies->imie, dzien, godzina);
+      printf("%s... Dzień: %d Godzina: %d:00\n", pies->imie, dzien, godzina);
       printf("%d\n", pies->glod);
       printf("%d\n", pies->prag);
       printf("%d\n", pies->zado);

@@ -12,6 +12,7 @@
 #include "menu.h"         //drukowanie menu startowego i innych statycznych elementów
 #include "logika.h"       //logika całej gry, zestaw warunków
 #include "komendy.h"      //działania na rzecz zwierzaka
+#include "losowanie.h"    //ułatwienie dla ziaren i losowania
 
 //////////
 static int  wyjscie = 0;

@@ -81,8 +81,8 @@ void wczytajDoTablic(){
 }
 
 void drukujGlowe(char tab[]){
-
-  for(int k=0; k<70; k++){          //czy można ulepszyć. printf("%s", tab) musi mieć 0 na końcu
+  int k;
+  for(k=0; k<70; k++){          //czy można ulepszyć. printf("%s", tab) musi mieć 0 na końcu
     printf("%c", tab[k]);
   }
 
@@ -90,8 +90,8 @@ void drukujGlowe(char tab[]){
 }
 
 void drukujDol(char tab[]){
-
-  for(int k=0; k<53; k++){
+  int k;
+  for(k=0; k<53; k++){
     printf("%c", tab[k]);
   }
 
@@ -100,9 +100,52 @@ void drukujDol(char tab[]){
 
 void drukuj(int warunek){
 
-if(warunek == 1){
-  drukujGlowe(glowa2);
-  drukujDol(dol2);
-}
+  if(warunek == 2){
+    drukujGlowe(glowa2);
+    drukujDol(dol2);
+    return;
+  }
+  if(warunek == 3){
+    drukujGlowe(glowa2);
+    drukujDol(dol3);
+    return;
+  }
+  if(warunek == 4){
+    drukujGlowe(glowa2);
+    drukujDol(dol1);
+    return;
+  }
+  if(warunek == 6){
+    drukujGlowe(glowa3);
+    drukujDol(dol2);
+    return;
+  }
+  if(warunek == 7){
+    drukujGlowe(glowa3);
+    drukujDol(dol3);
+    return;
+  }
+  if(warunek == 8){
+    drukujGlowe(glowa3);
+    drukujDol(dol1);
+    return;
+  }
+  if(warunek == 10){
+    drukujGlowe(glowa1);
+    drukujDol(dol2);
+    return;
+  }
+  if(warunek == 11){
+    drukujGlowe(glowa1);
+    drukujDol(dol3);
+    return;
+  }
+  if(warunek == 12){
+    drukujGlowe(glowa1);
+    drukujDol(dol1);
+    return;
+  }
+
+
   return;
 }

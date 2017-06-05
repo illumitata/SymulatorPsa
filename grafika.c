@@ -20,8 +20,6 @@ char wczytajPlik(char * sciezka, char * nazwa, char tab[]){
       strcat(sciezka,".txt");
       fp = fopen(sciezka,"r");
 
-//      printf("%s\n", sciezka);
-
       int k = 0;
 
       if (fp != NULL){
@@ -31,9 +29,7 @@ char wczytajPlik(char * sciezka, char * nazwa, char tab[]){
         }
       }
       fclose(fp);
-
-//     for(int p=0; p<53; p++) printf("%c", tab[p]);
-//     sleep(3);
+      
     return *tab;
 }
 

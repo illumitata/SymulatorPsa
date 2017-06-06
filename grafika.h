@@ -16,7 +16,14 @@ static char *glowa1;
 static char *glowa2;
 static char *glowa3;
 
+static char *miska;
+static char *woda;
+static char *spacer;
+static char *lekarz;
+
 void wczytajDoTablic();
+
+void drukujEkran(int ekran);
 
 void drukuj(int warunek);
 

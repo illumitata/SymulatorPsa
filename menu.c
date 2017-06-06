@@ -32,6 +32,7 @@ struct Pupil* stworzPsa(struct Pupil* pies){
     return pies;
 }
 
+
 void menuGry(){
 
   puts("Wpisz i zatwierdź enterem:");
@@ -53,7 +54,6 @@ int menu(struct Pupil* pies){
   printf("\n\t\t2 . [[ Kontynuuj ]]\n");
   printf("\n\t\t3 . [[   Wyjdź   ]]\n");
   printf("\n\t\t|||||||||||||||||||\n");
-
   printf("\n\n");
   printf("\n\t\t Wybierz opcje: ");
   scanf("%hd",&decyzja);

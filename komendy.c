@@ -10,7 +10,7 @@
 
 struct Pupil* dajJesc(struct Pupil* pies){
 
-  int losowa = losowanie();      //inicjalizacja randa (sprawdzić) seed?
+  int losowa = losowanie();
 
   if((pies->glod + (losowa%30 + 1))<100) pies->glod = pies->glod + (losowa%30 + 1);
   else pies->glod = 100;

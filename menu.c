@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include "symulator.h"
 #include "menu.h"
+#include "grafika.h"
 
 struct Pupil* stworzPsa(struct Pupil* pies){
 
@@ -32,6 +33,22 @@ struct Pupil* stworzPsa(struct Pupil* pies){
     return pies;
 }
 
+void menuInstrukcje(){
+
+      system("clear");
+      printf("Twoj pies może wyglądać w następujący sposób: \n\n");
+      drukuj(2);
+      printf("\n\t\tTwój pies najedzony, napity, wypoczęty.\n");
+      drukuj(7);
+      printf("\n\t\tTwój pies zgłodniał, potrzebuje wody lub musi wyjść na spacer.\n");
+      drukuj(12);
+      printf("\n\t\tJesteś blisko przegranej, lepiej zacznji zajmować się swoim pupilem.\n" );
+
+      sleep(7);
+
+  return;
+}
+
 
 void menuGry(){
 
@@ -52,7 +69,7 @@ int menu(struct Pupil* pies){
   printf("\n\t\t|||||||||||||||||||\n");
   printf("\n\t\t1 . [[ Nowa  gra ]]\n");
   printf("\n\t\t2 . [[ Kontynuuj ]]\n");
-  printf("\n\t\t3 . [[ Instrukcja   ]]\n");
+  printf("\n\t\t3 . [[   Pomoc   ]]\n");
   printf("\n\t\t4 . [[   Wyjdź   ]]\n");
   printf("\n\t\t|||||||||||||||||||\n");
   printf("\n\n");
@@ -65,6 +82,9 @@ int menu(struct Pupil* pies){
           break;
       case 2:
           //wczytanie psa
+      case 3:
+          menuInstrukcje();
+          menu(pies);
       case 4:
           free(pies);
           exit(1);                  //zabija program

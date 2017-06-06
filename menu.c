@@ -52,7 +52,8 @@ int menu(struct Pupil* pies){
   printf("\n\t\t|||||||||||||||||||\n");
   printf("\n\t\t1 . [[ Nowa  gra ]]\n");
   printf("\n\t\t2 . [[ Kontynuuj ]]\n");
-  printf("\n\t\t3 . [[   Wyjdź   ]]\n");
+  printf("\n\t\t3 . [[ Instrukcja   ]]\n");
+  printf("\n\t\t4 . [[   Wyjdź   ]]\n");
   printf("\n\t\t|||||||||||||||||||\n");
   printf("\n\n");
   printf("\n\t\t Wybierz opcje: ");
@@ -64,7 +65,7 @@ int menu(struct Pupil* pies){
           break;
       case 2:
           //wczytanie psa
-      case 3:
+      case 4:
           free(pies);
           exit(1);                  //zabija program
           break;

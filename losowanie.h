@@ -10,6 +10,7 @@
 #include "losowanie.h"
 
 time_t t;
+int    liczba;
 
 int losowanie();
 

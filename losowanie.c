@@ -5,3 +5,10 @@
 #include <stdlib.h>
 #include <math.h>
 #include "losowanie.h"
+
+int losowanie{
+
+  
+
+  return liczba;
+}

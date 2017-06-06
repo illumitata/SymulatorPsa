@@ -113,7 +113,7 @@ void drukujCzesc(char tab[]){
   return;
 }
 
-void drukujEkran(int ekran){
+int drukujEkran(int ekran){
 
   system("clear");
 
@@ -125,7 +125,7 @@ void drukujEkran(int ekran){
 
   sleep(2);
 
-  return;
+  return 1000; //zwraca przyspieszone tępo na jedno odświeżenie
 }
 
 void drukuj(int warunek){

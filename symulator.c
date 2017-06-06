@@ -15,19 +15,19 @@
 #include "losowanie.h"    //ułatwienie dla ziaren i losowania
 
 //////////
-static int  wyjscie = 0;
-static int  wybor   = 0;
-static char komenda = 0;  //A góra, B dół
-static int  sygnal  = 0;
-static int  pozycja = 1;  //pozycja strzałki w menu od 1 do 5
+static int  szybkosc = 50000;  //szybkość odświeżania
+static int  wyjscie  = 0;
+static int  wybor    = 0;
+static char komenda  = 0;      //A góra, B dół
+static int  sygnal   = 0;
+static int  pozycja  = 1;      //pozycja strzałki w menu od 1 do 5
 
 //Wątek odpowiadający za czytanie z klawiatury
 void *threadFunc(void *arg){
 
     do{
 
-        usleep(100000);
-        //sleep(2); na potrzeby testu
+        usleep(szybkosc);
 
         if(wybor != '\0') komenda = wybor;      //WAŻNA KOLEJNOŚĆ TYCH KOMEND
 
@@ -72,6 +72,9 @@ int main(void){
 
     int warunek = 0;
 
+    static int  szybkosctmp = 0;      //pomocnicza zmienna dla odświeżania w czasie
+    szybkosctmp = szybkosc;
+
     wybor = getche();   //(***)Dlaczego? Ponieważ przy starcie enter z wpisania imienia był zapamiętywany więc go czyścimy
     fflush(stdin);      //na wszelki wypadek
 
@@ -79,8 +82,9 @@ int main(void){
 
     while(wyjscie<1){
 
-      usleep(100000);
-      //sleep(2); na potrzeby testu
+      usleep(szybkosc);
+
+      szybkosc = szybkosctmp;       //podstawiamy stare tępo po wcześniejszym przyspieszeniu go
 
       system("clear");
       printf("%s... Dzień: %d Godzina: %d:00\n", pies->imie, dzien, godzina);
@@ -92,19 +96,19 @@ int main(void){
       if(sygnal==1){
         if(pozycja==1){
                         dajJesc(pies);    //nakarm - 1
-                        drukujEkran(pozycja);
+                        szybkosc = drukujEkran(pozycja);
                       }
         if(pozycja==2){
                         dajWode(pies);    //daj wodę - 2
-                        drukujEkran(pozycja);
+                        szybkosc = drukujEkran(pozycja);
                       }
         if(pozycja==3){
                         dajSpacer(pies);  //wyjdź na spacer - 3
-                        drukujEkran(pozycja);
+                        szybkosc = drukujEkran(pozycja);
                       }
         if(pozycja==4){
                         dajWet(pies);     //odwiedź weterynarza - 4
-                        drukujEkran(pozycja);
+                        szybkosc = drukujEkran(pozycja);
                       }
         if(pozycja==5){
                         wyjscie = 2;
@@ -135,7 +139,7 @@ int main(void){
 
     czas++;
 
-      if(czas%40 == 0){           //czas do zmiennej stałej
+      if(czas%80 == 0){           //czas do zmiennej stałej
         godzina++;
         pies->glod = pies->glod - 2;
         pies->prag = pies->prag - 2;

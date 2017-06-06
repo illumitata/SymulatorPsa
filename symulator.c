@@ -15,7 +15,6 @@
 #include "losowanie.h"    //ułatwienie dla ziaren i losowania
 
 //////////
-static int drukowanie = 0;
 static int  wyjscie = 0;
 static int  wybor   = 0;
 static char komenda = 0;  //A góra, B dół
@@ -48,7 +47,7 @@ void *threadFunc(void *arg){
           }
         }
         else wybor = '\0';
-    }while(wyjscie!=1);
+    }while(wyjscie<1);
 
     return NULL;
 }
@@ -64,8 +63,10 @@ int main(void){
 
     static int dzien = 0;
     static long long int czas = 0;
+    static int godzinarano = 7;
     static int godzina = 0;
     static int choroba = 0;
+    godzina = godzinarano;
 
     pthread_t pth;
 
@@ -76,7 +77,7 @@ int main(void){
 
     pthread_create(&pth,NULL,threadFunc,"wejscie");
 
-    while(wyjscie!=1){
+    while(wyjscie<1){
 
       usleep(100000);
       //sleep(2); na potrzeby testu
@@ -106,7 +107,7 @@ int main(void){
                         drukujEkran(pozycja);
                       }
         if(pozycja==5){
-                        wyjscie = 1;
+                        wyjscie = 2;
                        }
         sygnal = 0;
         komenda = '\0';                   //rozwiązuje problem kiedy wciskamy enter kilka razy
@@ -145,15 +146,30 @@ int main(void){
         pies->zado = pies->zado - 5;
           if(godzina%24==0){
             czas = 0;
-            godzina = 0;
+            godzina = godzinarano;
             dzien++;
+            drukujEkran(5);
           }
       }
     }
 
     system("clear");
-    printf("\n\t\t  Opiekowałeś się psem przez %d dni i %d godzin.\n", dzien, godzina);
-    printf("\n\t\t (Naciśnij dowolny przycisk, żeby wyjść z gry)\n");
+
+    switch (wyjscie){
+      case 1:
+      printf("\n\t\t  Opiekowałeś się psem przez %d dni i %d godzin.\n", dzien, godzina);
+      printf("\n\t\t            Niestety zaniedbałeś go.\n");
+      printf("\n\t\t (Naciśnij dowolny przycisk, żeby wyjść z gry)\n");
+      break;
+      case 2:
+      printf("\n\t\t       Opiekowałeś się psem przez %d dni i %d godzin.\n", dzien, godzina);
+      printf("\n\t\t %s został zapisany, możesz wrócić do niego kiedy chesz.\n", pies->imie);
+      printf("\n\t\t       (Naciśnij dowolny przycisk, żeby wyjść z gry)\n");
+      break;
+      default:
+      printf("Zepsułeś program brawo. :)\n");
+      break;
+    }
 
     free(pies);
 

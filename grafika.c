@@ -50,6 +50,7 @@ void wczytajDoTablic(){
   woda   = malloc(sizeof(char) * 170);
   spacer = malloc(sizeof(char) * 240);
   lekarz = malloc(sizeof(char) * 170);
+  noc    = malloc(sizeof(char) * 220);
 
   char *plik = malloc(sizeof(char) * 10);
 
@@ -93,7 +94,10 @@ void wczytajDoTablic(){
   *lekarz = wczytajPlik(sciezka, plik, lekarz);
   CLEAR(sciezka);
 
-  sleep(2);
+  plik = "ekrany/noc";
+  *noc = wczytajPlik(sciezka, plik, noc);
+  CLEAR(sciezka);
+
   plik = NULL;
 
   free(plik);
@@ -117,9 +121,9 @@ void drukujEkran(int ekran){
   if(ekran==2) drukujCzesc(woda);
   if(ekran==3) drukujCzesc(spacer);
   if(ekran==4) drukujCzesc(lekarz);
+  if(ekran==5) drukujCzesc(noc);
 
-  sleep(3);
-  system("clear");
+  sleep(2);
 
   return;
 }

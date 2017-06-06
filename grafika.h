@@ -20,6 +20,7 @@ static char *miska;
 static char *woda;
 static char *spacer;
 static char *lekarz;
+static char *noc;
 
 void wczytajDoTablic();
 

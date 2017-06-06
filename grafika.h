@@ -24,7 +24,7 @@ static char *noc;
 
 void wczytajDoTablic();
 
-void drukujEkran(int ekran);
+int drukujEkran(int ekran);     //zwraca przyspieszone tępo na jedno odświeżenie
 
 void drukuj(int warunek);
 

@@ -28,4 +28,6 @@ void drukujEkran(int ekran);
 
 void drukuj(int warunek);
 
+void uwolnijGrafiki();
+
 #endif /* GRAFIKA_H*/

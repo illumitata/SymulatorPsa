@@ -180,3 +180,21 @@ void drukuj(int warunek){
 
 return;
 }
+
+void uwolnijGrafiki(){
+  free(dol1);
+  free(dol2);
+  free(dol3);
+
+  free(glowa1);
+  free(glowa2);
+  free(glowa3);
+
+  free(miska);
+  free(woda);
+  free(spacer);
+  free(lekarz);
+  free(noc);
+
+  return;
+}

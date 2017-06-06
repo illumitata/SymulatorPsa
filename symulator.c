@@ -172,6 +172,7 @@ int main(void){
     }
 
     free(pies);
+    uwolnijGrafiki();
 
     pthread_join(pth,NULL);
 

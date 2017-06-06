@@ -7,7 +7,7 @@ all: symulator.o menu.o getch.o grafika.o logika.o komendy.o losowanie.o
 symulator.o: symulator.c symulator.h getch.h grafika.h menu.h logika.h losowanie.h
 	$(CC)  symulator.c -c -o symulator.o -lpthread
 
-menu.o: menu.c symulator.h menu.h
+menu.o: menu.c symulator.h menu.h grafika.h
 	$(CC) menu.c -c -o menu.o	-lpthread
 
 komendy.o: komendy.c symulator.h komendy.h losowanie.h

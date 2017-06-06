@@ -16,24 +16,36 @@
 
 //////////
 static int  wyjscie = 0;
-static char wybor   = 0;
-static char komenda = 0;
+static int wybor    = 0;
+static char komenda = 0;  //A góra, B dół
 static int  sygnal  = 0;
-
+static int  pozycja = 1;  //pozycja strzałki w menu od 1 do 5
 
 //Wątek odpowiadający za czytanie z klawiatury
 void *threadFunc(void *arg){
 
     do{
         usleep(100000);
+        //sleep(2); na potrzeby testu
 
-        if(wybor != '\0') komenda = wybor;       //WAŻNA KOLEJNOŚĆ TYCH KOMEND
+        if(wybor != '\0') komenda = wybor;      //WAŻNA KOLEJNOŚĆ TYCH KOMEND
 
         wybor = getche();
 
-        if(wybor==10) sygnal = 1;                     //teraz wysyła sygnał czyli i potem od razu zeruje, bo eneter nie leży od 48 do57
-        if(!(wybor>48 && wybor<54)) wybor = '\0';     //wybór leży tylko miedzy danymi w menu inaczej "\0"
-                                                      //(!!!) oraz po naciśnięciu entera dopiero wysyła sygnał
+        if(wybor==10){                          //jeśli ENTER zatwierdza wybór i czyści
+          sygnal = 1;
+          wybor  = '\0';
+        }
+
+        if(wybor == 27){                        //Ubuntu pod którym pracuje najpierw ściąga 27
+          komenda = getche();
+          if(komenda==91){                      //Potem ściąga 91 i dopiero dla 65 i 66 określa strzałkę
+            komenda = getche();
+            if(komenda == 65 && pozycja>1) pozycja-=1;
+            if(komenda == 66 && pozycja<5) pozycja+=1;
+          }
+        }
+        else wybor = '\0';
     }while(wyjscie<1);
 
     return NULL;
@@ -65,6 +77,7 @@ int main(void){
     while(1){
 
       usleep(100000);
+      //sleep(2); na potrzeby testu
 
       system("clear");
       printf("%s... Dzień: %d Godzina: %d:00\n", pies->imie, dzien, godzina);
@@ -74,11 +87,11 @@ int main(void){
       printf("%d\n", pies->zdro);
 
       if(sygnal==1){
-        if(komenda==49) dajJesc(pies);    //nakarm - 1
-        if(komenda==50) dajWode(pies);    //daj wodę - 2
-        if(komenda==51) dajSpacer(pies);  //wyjdź na spacer - 3
-        if(komenda==52) dajWet(pies);     //odwiedź weterynarza - 4
-        if(komenda==53){
+        if(pozycja==1) dajJesc(pies);    //nakarm - 1
+        if(pozycja==2) dajWode(pies);    //daj wodę - 2
+        if(pozycja==3) dajSpacer(pies);  //wyjdź na spacer - 3
+        if(pozycja==4) dajWet(pies);     //odwiedź weterynarza - 4
+        if(pozycja==5){
                         wyjscie = 1;
                         break;
                        }
@@ -99,25 +112,25 @@ int main(void){
       dzięki temu nie trzeba tak wiele linkować, omijamy tonę niepotrzebnej zabawy
     */
 
-    menuGry();
+    menuGry(pozycja);
 
     int czynnik = losowanie();
     if((czynnik%10000)<500) choroba = 1;
     else choroba = 0;
 
-    printf("Twoja czynność: %c\n", wybor);
+//    printf("Twoja czynność: %c\n", wybor);
 
     czas++;
 
       if(czas%40 == 0){           //czas do zmiennej stałej
         godzina++;
-        pies->glod = pies->glod - 5;
-        pies->prag = pies->prag - 5;
+        pies->glod = pies->glod - 2;
+        pies->prag = pies->prag - 2;
         if(choroba==1){
           int problem = losowanie();
           pies->zdro = pies->zdro - (problem%30);
         }
-        pies->zado = pies->zado - 10;
+        pies->zado = pies->zado - 5;
           if(godzina%24==0){
             czas = 0;
             godzina = 0;

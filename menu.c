@@ -58,15 +58,25 @@ void menuInstrukcje(){
 }
 
 
-void menuGry(){
+void menuGry(int poz){
 
-  puts("Wpisz i zatwierdź enterem:");
+  puts("Strzałka wskazuje wybór(sterowanie klawiaturą):");
+  if(poz==1) printf(" > ");
   puts("1 - nakarm zwierzaka.");
+
+  if(poz==2) printf(" > ");
   puts("2 - daj wodę zwierzakowi.");
+
+  if(poz==3) printf(" > ");
   puts("3 - wyjdź na spacer lub pobaw się.");
+
+  if(poz==4) printf(" > ");
   puts("4 - wycieczka do weterynarza lub pielęgnacja.");
+
+  if(poz==5) printf(" > ");
   puts("5 - wyjdź z symulatora.");
 
+  return;
 }
 
 int menu(struct Pupil* pies){

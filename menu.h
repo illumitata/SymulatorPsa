@@ -11,6 +11,6 @@
 
 int menu(struct Pupil* pies);
 
-void menuGry();
+void menuGry(int poz);
 
 #endif /* !MENU_H */

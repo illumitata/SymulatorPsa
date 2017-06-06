@@ -5,3 +5,14 @@
 #include <stdlib.h>
 #include <math.h>
 #include "losowanie.h"
+
+int losowanie(){
+
+  time_t t;
+  int    liczba;
+
+  srand((unsigned) time(&t));
+  liczba = rand();
+
+  return liczba;
+}

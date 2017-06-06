@@ -46,13 +46,16 @@ void menuInstrukcje(){
       printf("\n\t\tJesteś blisko przegranej, lepiej zacznji zajmować się swoim pupilem.\n" );
       printf("\n\n(Wciśnij dowolny przycisk żeby wrócić do menu)\n");
 
-      char powrot = '\0';
-      char wyjdz  = '\0';
+      int powrot = 0;
+      int wyjdz  = 0;
 
       do{
-        if(powrot==10) wyjdz ='\n';
         powrot = getche();
-      }while(wyjdz == '\0');
+        if(powrot!=0){
+          wyjdz = 1;
+          fflush(stdin);
+        }
+      }while(wyjdz != 1);
 
       return;
 }
@@ -80,22 +83,56 @@ void menuGry(int poz){
 }
 
 int menu(struct Pupil* pies){
-  short int decyzja;
-  system("clear");
-  system("clear");
+  int decyzja = 1;
+  int wyborMenu;
+  int komendaMenu;
+  int sygnalMenu = 0;
 
-  printf("\n\t\t|||||||||||||||||||\n");
-  printf("\n\t\t1 . [[ Nowa  gra ]]\n");
-  printf("\n\t\t2 . [[ Kontynuuj ]]\n");
-  printf("\n\t\t3 . [[   Pomoc   ]]\n");
-  printf("\n\t\t4 . [[   Wyjdź   ]]\n");
-  printf("\n\t\t|||||||||||||||||||\n");
-  printf("\n\n");
-  printf("\n\t\t Wybierz opcje: ");
-  scanf("%hd",&decyzja);
+  while(sygnalMenu!=1){
+
+      system("clear");
+
+      puts("\t\t|||||||||||||||||||");
+      printf("\n\t\t");
+      if(decyzja==1) printf("  > ");
+      puts("[[ Nowa  gra ]]");
+      printf("\n\t\t");
+      if(decyzja==2) printf("  > ");
+      puts("[[ Kontynuuj ]]");
+      printf("\n\t\t");
+      if(decyzja==3) printf("  > ");
+      puts("[[   Pomoc   ]]");
+      printf("\n\t\t");
+      if(decyzja==4) printf("  > ");
+      puts("[[   Wyjdź   ]]");
+      puts("\n\t\t|||||||||||||||||||");
+      printf("\n\n");
+
+      puts("\t\tWybierz strzałkami");
+
+      if(wyborMenu != '\0') komendaMenu = wyborMenu;      //WAŻNA KOLEJNOŚĆ TYCH KOMEND
+
+      wyborMenu = getche();
+
+      if(wyborMenu==10){                          //jeśli ENTER zatwierdza wybór i czyści
+        sygnalMenu = 1;
+        wyborMenu  = '\0';
+      }
+
+      if(wyborMenu == 27){
+        komendaMenu = getche();
+        if(komendaMenu==91){
+          komendaMenu = getche();
+          if(komendaMenu == 65 && decyzja>1) decyzja-=1;
+          if(komendaMenu == 66 && decyzja<4) decyzja+=1;
+        }
+      }
+      else wyborMenu = '\0';
+  }
 
   switch(decyzja){
       case 1:
+          fflush(stdin);
           stworzPsa(pies);
           break;
       case 2:
@@ -110,7 +147,7 @@ int menu(struct Pupil* pies){
           free(pies);
           exit(1);                  //zabija program
           break;
-      default:
+      default:                      //nie powinno się zdarzyć ale na wszelki wypadek
           menu(pies);
           break;
   }

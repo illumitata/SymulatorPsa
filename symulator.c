@@ -16,7 +16,7 @@
 
 //////////
 static int  wyjscie = 0;
-static int wybor    = 0;
+static int  wybor   = 0;
 static char komenda = 0;  //A góra, B dół
 static int  sygnal  = 0;
 static int  pozycja = 1;  //pozycja strzałki w menu od 1 do 5
@@ -37,19 +37,18 @@ void *threadFunc(void *arg){
           wybor  = '\0';
         }
 
-        if(wybor == 27){                        //Ubuntu pod którym pracuje najpierw ściąga 27
+        if(wybor == 27){
           komenda = getche();
-          if(komenda==91){                      //Potem ściąga 91 i dopiero dla 65 i 66 określa strzałkę
+          if(komenda==91){
             komenda = getche();
             if(komenda == 65 && pozycja>1) pozycja-=1;
             if(komenda == 66 && pozycja<5) pozycja+=1;
           }
         }
         else wybor = '\0';
-    }while(wyjscie<1);
+    }while(wyjscie!=1);
 
     return NULL;
-
 }
 
 //Główny wątek gry
@@ -74,7 +73,7 @@ int main(void){
 
     pthread_create(&pth,NULL,threadFunc,"wejscie");
 
-    while(1){
+    while(wyjscie!=1){
 
       usleep(100000);
       //sleep(2); na potrzeby testu
@@ -93,7 +92,6 @@ int main(void){
         if(pozycja==4) dajWet(pies);     //odwiedź weterynarza - 4
         if(pozycja==5){
                         wyjscie = 1;
-                        break;
                        }
         sygnal = 0;
         komenda = '\0';                   //rozwiązuje problem kiedy wciskamy enter kilka razy
@@ -103,7 +101,7 @@ int main(void){
 
     if(warunek == 0){
       wyjscie = 1;
-      break; //drukuj ekran przegranej i break z pętli
+      //break; //drukuj ekran przegranej i break z pętli
     }
     else drukuj(warunek);
     /*Dlaczego tak a nie przywołując tablice?
@@ -140,8 +138,8 @@ int main(void){
     }
 
     system("clear");
-    printf("\n\t\t Wytrzymałeś %d dni i %d godzin.\n", dzien, godzina);
-    printf("\n\t (Naciśnij dowolny przycisk, żeby wyjść z gry)\n");
+    printf("\n\t\t  Opiekowałeś się psem przez %d dni i %d godzin.\n", dzien, godzina);
+    printf("\n\t\t (Naciśnij dowolny przycisk, żeby wyjść z gry)\n");
 
     free(pies);
 

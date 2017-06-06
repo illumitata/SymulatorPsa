@@ -30,10 +30,8 @@ void *threadFunc(void *arg){
         if(wybor != '\0') komenda = wybor;       //WAŻNA KOLEJNOŚĆ TYCH KOMEND
 
         wybor = getche();
-        //printf("%c\n", wybor);
-        //sleep(1);
 
-        if(wybor==10) sygnal = 1;          //teraz wysyła sygnał czyli i potem od razu zeruje, bo eneter nie leży od 48 do57
+        if(wybor==10) sygnal = 1;                     //teraz wysyła sygnał czyli i potem od razu zeruje, bo eneter nie leży od 48 do57
         if(!(wybor>48 && wybor<54)) wybor = '\0';     //wybór leży tylko miedzy danymi w menu inaczej "\0"
                                                       //(!!!) oraz po naciśnięciu entera dopiero wysyła sygnał
     }while(wyjscie<1);
@@ -104,7 +102,7 @@ int main(void){
     menuGry();
 
     int czynnik = losowanie();
-    if((czynnik%10000)<1000) choroba = 1;
+    if((czynnik%10000)<500) choroba = 1;
     else choroba = 0;
 
     printf("Twoja czynność: %c\n", wybor);

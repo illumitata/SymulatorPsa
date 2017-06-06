@@ -104,7 +104,7 @@ int main(void){
     menuGry();
 
     int czynnik = losowanie();
-    if((czynnik%10000)<1000) choroba = 1;
+    if((czynnik%10000)<500) choroba = 1;
     else choroba = 0;
 
     printf("Twoja czynność: %c\n", wybor);

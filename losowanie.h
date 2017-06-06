@@ -9,9 +9,6 @@
 #include <math.h>
 #include "losowanie.h"
 
-time_t t;
-int    liczba;
-
 int losowanie();
 
 #endif /*LOSOWANIE_H*/

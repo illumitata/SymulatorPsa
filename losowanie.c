@@ -6,9 +6,13 @@
 #include <math.h>
 #include "losowanie.h"
 
-int losowanie{
+int losowanie(){
 
-  
+  time_t t;
+  int    liczba;
+
+  srand((unsigned) time(&t));
+  liczba = rand();
 
   return liczba;
 }

@@ -24,9 +24,6 @@ static int  sygnal  = 0;
 //Wątek odpowiadający za czytanie z klawiatury
 void *threadFunc(void *arg){
 
-    char *str;
-    str=(char*)arg;
-
     do{
         usleep(100000);
 
@@ -106,7 +103,7 @@ int main(void){
 
     menuGry();
 
-    int czynnik = rand();
+    int czynnik = losowanie();
     if((czynnik%10000)<1000) choroba = 1;
     else choroba = 0;
 
@@ -119,7 +116,7 @@ int main(void){
         pies->glod = pies->glod - 5;
         pies->prag = pies->prag - 5;
         if(choroba==1){
-          int problem = rand();
+          int problem = losowanie();
           pies->zdro = pies->zdro - (problem%30);
         }
         pies->zado = pies->zado - 10;

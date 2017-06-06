@@ -101,7 +101,6 @@ int main(void){
 
     if(warunek == 0){
       wyjscie = 1;
-      //break; //drukuj ekran przegranej i break z pętli
     }
     else drukuj(warunek);
     /*Dlaczego tak a nie przywołując tablice?

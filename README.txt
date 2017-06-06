@@ -1,1 +1,1 @@
-Projekt zaliczeniowy Języki Programowania (język C) Jan Iwaszkiewicz, Krzysztof Józefczyk
+Projekt zaliczeniowy Języki Programowania (język C) Jan Iwaszkiewicz

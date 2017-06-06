@@ -15,6 +15,7 @@
 #include "losowanie.h"    //ułatwienie dla ziaren i losowania
 
 //////////
+static int drukowanie = 0;
 static int  wyjscie = 0;
 static int  wybor   = 0;
 static char komenda = 0;  //A góra, B dół
@@ -25,6 +26,7 @@ static int  pozycja = 1;  //pozycja strzałki w menu od 1 do 5
 void *threadFunc(void *arg){
 
     do{
+
         usleep(100000);
         //sleep(2); na potrzeby testu
 
@@ -69,7 +71,8 @@ int main(void){
 
     int warunek = 0;
 
-    fflush(stdin);  //na wszelki wypadek
+    wybor = getche();   //(***)Dlaczego? Ponieważ przy starcie enter z wpisania imienia był zapamiętywany więc go czyścimy
+    fflush(stdin);      //na wszelki wypadek
 
     pthread_create(&pth,NULL,threadFunc,"wejscie");
 
@@ -86,10 +89,22 @@ int main(void){
       printf("%d\n", pies->zdro);
 
       if(sygnal==1){
-        if(pozycja==1) dajJesc(pies);    //nakarm - 1
-        if(pozycja==2) dajWode(pies);    //daj wodę - 2
-        if(pozycja==3) dajSpacer(pies);  //wyjdź na spacer - 3
-        if(pozycja==4) dajWet(pies);     //odwiedź weterynarza - 4
+        if(pozycja==1){
+                        dajJesc(pies);    //nakarm - 1
+                        drukujEkran(pozycja);
+                      }
+        if(pozycja==2){
+                        dajWode(pies);    //daj wodę - 2
+                        drukujEkran(pozycja);
+                      }
+        if(pozycja==3){
+                        dajSpacer(pies);  //wyjdź na spacer - 3
+                        drukujEkran(pozycja);
+                      }
+        if(pozycja==4){
+                        dajWet(pies);     //odwiedź weterynarza - 4
+                        drukujEkran(pozycja);
+                      }
         if(pozycja==5){
                         wyjscie = 1;
                        }

@@ -7,6 +7,7 @@
 #include <unistd.h>
 #include "symulator.h"
 #include "menu.h"
+#include "getch.h"
 
 int menu(struct Pupil* pies);
 

@@ -7,6 +7,7 @@
 #include "symulator.h"
 #include "menu.h"
 #include "grafika.h"
+#include "getch.h"
 
 struct Pupil* stworzPsa(struct Pupil* pies){
 
@@ -43,10 +44,17 @@ void menuInstrukcje(){
       printf("\n\t\tTwój pies zgłodniał, potrzebuje wody lub musi wyjść na spacer.\n");
       drukuj(12);
       printf("\n\t\tJesteś blisko przegranej, lepiej zacznji zajmować się swoim pupilem.\n" );
+      printf("\n\n(Wciśnij dowolny przycisk żeby wrócić do menu)\n");
 
-      sleep(7);
+      char powrot = '\0';
+      char wyjdz  = '\0';
 
-  return;
+      do{
+        if(powrot==10) wyjdz ='\n';
+        powrot = getche();
+      }while(wyjdz == '\0');
+
+      return;
 }
 
 
@@ -85,12 +93,16 @@ int menu(struct Pupil* pies){
       case 3:
           menuInstrukcje();
           menu(pies);
+          break;
+          /*tutaj nie było breaka i double menu, KOMPLETNIE NIEPOTRZEBNIE
+          więc struktura po wyświetleniu pomocy się psuła*/
       case 4:
           free(pies);
           exit(1);                  //zabija program
           break;
       default:
           menu(pies);
+          break;
   }
 
   system("clear");

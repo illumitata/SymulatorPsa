@@ -34,15 +34,23 @@ struct Zapis* wczytajGre(struct Zapis* zapis){
 
     if(fp != NULL){
       fscanf(fp,"%d %d %s %d %d %d %d",&zapis->dzien,&zapis->godzina,zapis->imie,&glod,&prag,&zado,&zdro);
+      zapis->puste = 0;
+
+          zapis->glod = glod;
+          zapis->prag = prag;
+          zapis->zado = zado;
+          zapis->zdro = zdro;
+
+      fclose(fp);
     }
-    fclose(fp);
+    else{
+      system("clear");
+      printf("\t\t Nie masz zapisanego psa.\n");
+      zapis->puste = 1;
+      sleep(2);
+    }
 
-    zapis->glod = glod;
-    zapis->prag = prag;
-    zapis->zado = zado;
-    zapis->zdro = zdro;
-
-    //printf("%d %d %s %d %d %d %d",zapis->dzien,zapis->godzina,zapis->imie,zapis->glod,zapis->prag, zapis->zado,zapis->zdro);
+//printf("%d %d %s %d %d %d %d",zapis->dzien,zapis->godzina,zapis->imie,zapis->glod,zapis->prag, zapis->zado,zapis->zdro);
 
     return zapis;
 

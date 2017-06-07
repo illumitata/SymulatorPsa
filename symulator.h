@@ -26,6 +26,7 @@ typedef struct Zapis{
   char       zado;          //zadowolenie
   int        godzina;
   int        dzien;
+  int        puste;         //czy zapis się powiódł
 }Zapis;
 
 #endif /* !SYMULATOR_H */

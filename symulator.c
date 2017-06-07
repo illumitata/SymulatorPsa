@@ -12,8 +12,13 @@
 #include "menu.h"         //drukowanie menu startowego i innych statycznych elementów
 #include "logika.h"       //logika całej gry, zestaw warunków
 #include "komendy.h"      //działania na rzecz zwierzaka
+<<<<<<< HEAD
+#include "losowanie.h"    //ułatwienie dla ziaren i losowania
+#include "zapis.h"        //zapisywanie gry
+=======
 #include "losowanie.h"
 #include "zapis.h"    //ułatwienie dla ziaren i losowania
+>>>>>>> master
 
 //////////
 static int  szybkosc = 50000;  //szybkość odświeżania
@@ -60,18 +65,24 @@ int main(void){
 
     struct Pupil *pies = malloc(sizeof(Pupil));
 
-    menu(pies);
+    int wyborMenu = menu(pies);
 
-    static int dzien = 0;
-    static long long int czas = 0;
-    static int godzinarano = 7;
-    static int godzina = 0;
-    static int choroba = 0;
-    godzina = godzinarano;
+    static int godzinarano = 7;         //dla każdego wypadku będzie tak samo
+    int warunek = 0;
+
+    switch(wyborMenu){
+      case 1:
+      static int dzien = 0;
+      static long long int czas = 0;
+      static int godzina = 0;
+      static int choroba = 0;
+      godzina = godzinarano;
+      break;
+      case 2:
+      break;
+    }
 
     pthread_t pth;
-
-    int warunek = 0;
 
     static int  szybkosctmp = 0;      //pomocnicza zmienna dla odświeżania w czasie
     szybkosctmp = szybkosc;

@@ -134,9 +134,12 @@ int menu(struct Pupil* pies){
       case 1:
           fflush(stdin);
           stworzPsa(pies);
+          return 1;
           break;
       case 2:
-          //wczytanie psa
+          pies = wczytajGre(pies);
+          return 2;
+          break;
       case 3:
           menuInstrukcje();
           menu(pies);

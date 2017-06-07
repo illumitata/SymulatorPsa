@@ -1,10 +1,10 @@
 CC=gcc
 CFLAGS=-Wall
 
-all: symulator.o menu.o getch.o grafika.o logika.o komendy.o losowanie.o
-	$(CC) symulator.o menu.o grafika.o getch.o logika.o komendy.o losowanie.o -o symulator -lpthread
+all: symulator.o menu.o getch.o grafika.o logika.o komendy.o losowanie.o zapis.o
+	$(CC) symulator.o menu.o grafika.o getch.o logika.o komendy.o losowanie.o zapis.o -o symulator -lpthread
 
-symulator.o: symulator.c symulator.h getch.h grafika.h menu.h logika.h losowanie.h
+symulator.o: symulator.c symulator.h getch.h grafika.h menu.h logika.h losowanie.h zapis.h
 	$(CC)  symulator.c -c -o symulator.o -lpthread
 
 menu.o: menu.c symulator.h menu.h grafika.h getch.h
@@ -24,6 +24,8 @@ grafika.o: grafika.c grafika.h
 
 losowanie.o: losowanie.c losowanie.h
 	$(CC) losowanie.c -c -o losowanie.o -lpthread
+zapis.o: zapis.c zapis.h symulator.h
+	$(CC) zapis.c -c -o zapis.o -lpthread
 
 clean:		#make clean w terminalu usuwa wszystkie zbędne pliki *.o
 	@rm -f *.o

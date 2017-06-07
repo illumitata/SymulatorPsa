@@ -10,6 +10,6 @@
 
 void zapiszGre(struct Pupil* pies,int dzien,int godzina);
 
-struct Pupil* wczytajGre(struct Pupil* pies, int dzien, int godzina);
+struct Zapis* wczytajGre(struct Zapis* zapis);
 
 #endif /*ZAPIS_H*/

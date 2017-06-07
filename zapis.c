@@ -14,37 +14,36 @@ void zapiszGre(struct Pupil* pies,int dzien,int godzina){
 
       if(fp != NULL){
         fprintf(fp,"%d %d %s %d %d %d %d",dzien,godzina,pies->imie,pies->glod,pies->prag,pies->zado,pies->zdro);
-    /*    fprintf(fp,"%d\n",godzina);
-        fprintf(fp,"%s\n",pies->imie);
-        fprintf(fp,"%d\n",pies->glod);
-        fprintf(fp,"%d\n",pies-> prag);
-        fprintf(fp,"%d\n",pies->zado);
-        fprintf(fp,"%d\n",pies->zdro);
-    */  }
+      }
 
       fclose(fp);
 
       return;
 }
 
-struct Pupil* wczytajGre(struct Pupil* pies, int dzien, int godzina){
+struct Zapis* wczytajGre(struct Zapis* zapis){
 
     FILE * fp;
     char * folder = "zapis/zapis.txt";
     fp = fopen(folder,"r");
 
+    int glod;
+    int prag;
+    int zado;
+    int zdro;
+
     if(fp != NULL){
-      fscanf(fp,"%d %d %s %d %d %d %d",&dzien,&godzina,pies->imie,&(pies->glod),&(pies->prag), &pies->zado,&pies->zdro);
-    /*  fscanf(fp,"%d\n",&godzina);
-      fscanf(fp,"%s\n",pies->imie);
-      fscanf(fp,"%d\n",&pies->glod);
-      fscanf(fp,"%d\n",&pies->prag);
-      fscanf(fp,"%d\n",&pies->zado);
-      fscanf(fp,"%d\n",&pies->zdro);
-  */
+      fscanf(fp,"%d %d %s %d %d %d %d",&zapis->dzien,&zapis->godzina,zapis->imie,&glod,&prag,&zado,&zdro);
     }
     fclose(fp);
 
-    return pies;
+    zapis->glod = glod;
+    zapis->prag = prag;
+    zapis->zado = zado;
+    zapis->zdro = zdro;
+
+    //printf("%d %d %s %d %d %d %d",zapis->dzien,zapis->godzina,zapis->imie,zapis->glod,zapis->prag, zapis->zado,zapis->zdro);
+
+    return zapis;
 
 }

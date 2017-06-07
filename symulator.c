@@ -41,15 +41,17 @@ void *threadFunc(void *arg){
           wybor  = '\0';
         }
 
-        if(wybor == 27){
-          komenda = getche();
-          if(komenda==91){
+        if(sygnal!=1){
+          if(wybor == 27){
             komenda = getche();
-            if(komenda == 65 && pozycja>1) pozycja-=1;
-            if(komenda == 66 && pozycja<5) pozycja+=1;
+            if(komenda==91){
+              komenda = getche();
+              if(komenda == 65 && pozycja>1) pozycja-=1;
+              if(komenda == 66 && pozycja<5) pozycja+=1;
+            }
           }
+          else wybor = '\0';
         }
-        else wybor = '\0';
     }while(wyjscie<1);
 
     return NULL;
@@ -60,22 +62,37 @@ int main(void){
 
     wczytajDoTablic();
 
-    struct Pupil *pies = malloc(sizeof(Pupil));
+    struct Pupil *pies  = malloc(sizeof(Pupil));
+    struct Zapis *zapis = malloc(sizeof(Zapis));
 
-        static int godzinarano = 7;         //dla każdego wypadku będzie tak samo
+        static int godzinarano = 7;         //dla każdego wypadku będzie tak samo inicjalizacja
         static int dzien = 0;
         static long long int czas = 0;
         static int godzina = 0;
         static int choroba = 0;
         int warunek = 0;
 
-    int wyborMenu = menu(pies);
+    int wyborMenu = menu(pies, zapis);
 
     switch(wyborMenu){
-      case 1:
+      case 1:                               //nowa gra
       godzina = godzinarano;
+      free(zapis);
+      wybor = getche();                     //(***)Dlaczego? Ponieważ przy starcie enter z wpisania imienia był zapamiętywany więc go czyścimy
       break;
-      case 2:
+      case 2:                               //wczytanie
+      godzina = zapis->godzina;
+      dzien   = zapis->dzien;
+      strcpy(pies->imie,zapis->imie);
+      pies->glod = zapis->glod;
+      pies->prag = zapis->prag;
+      pies->zado = zapis->zado;
+      pies->zdro = zapis->zdro;
+      free(zapis);
+      break;
+      default:
+      printf("BŁĄD!!!111\n");
+      sleep(3);
       break;
     }
 
@@ -84,8 +101,7 @@ int main(void){
     static int  szybkosctmp = 0;      //pomocnicza zmienna dla odświeżania w czasie
     szybkosctmp = szybkosc;
 
-    wybor = getche();   //(***)Dlaczego? Ponieważ przy starcie enter z wpisania imienia był zapamiętywany więc go czyścimy
-    fflush(stdin);      //na wszelki wypadek
+    fflush(stdin);                    //na wszelki wypadek
 
     pthread_create(&pth,NULL,threadFunc,"wejscie");
 
@@ -93,7 +109,7 @@ int main(void){
 
       usleep(szybkosc);
 
-      szybkosc = szybkosctmp;       //podstawiamy stare tępo po wcześniejszym przyspieszeniu go
+      szybkosc = szybkosctmp;         //podstawiamy stare tępo po wcześniejszym przyspieszeniu go
 
       system("clear");
       printf("%s... Dzień: %d Godzina: %d:00\n", pies->imie, dzien, godzina);

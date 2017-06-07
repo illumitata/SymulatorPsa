@@ -9,7 +9,7 @@
 #include "menu.h"
 #include "getch.h"
 
-int menu(struct Pupil* pies);
+int menu(struct Pupil* pies, struct Zapis* zapis);
 
 void menuGry(int poz);
 

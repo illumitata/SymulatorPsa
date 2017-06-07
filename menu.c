@@ -82,7 +82,7 @@ void menuGry(int poz){
   return;
 }
 
-int menu(struct Pupil* pies){
+int menu(struct Pupil* pies, struct Zapis* zapis){
   int decyzja = 1;
   int wyborMenu;
   int komendaMenu;
@@ -137,21 +137,23 @@ int menu(struct Pupil* pies){
           return 1;
           break;
       case 2:
-          wczytajGre(pies, 0, 0);
+          fflush(stdin);
+          wczytajGre(zapis);
           return 2;
           break;
       case 3:
           menuInstrukcje();
-          menu(pies);
+          menu(pies, zapis);
           break;
           /*tutaj nie było breaka i double menu, KOMPLETNIE NIEPOTRZEBNIE
           więc struktura po wyświetleniu pomocy się psuła*/
       case 4:
           free(pies);
+          free(zapis);
           exit(1);                  //zabija program
           break;
       default:                      //nie powinno się zdarzyć ale na wszelki wypadek
-          menu(pies);
+          menu(pies, zapis);
           break;
   }
 

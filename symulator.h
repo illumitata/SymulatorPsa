@@ -18,4 +18,14 @@ typedef struct Pupil{
   char       zado;          //zadowolenie
 } Pupil;
 
+typedef struct Zapis{
+  char       imie[30];      //imię psa
+  char       glod;          //glod
+  char       prag;          //pragnienie
+  char       zdro;          //zdrowie
+  char       zado;          //zadowolenie
+  int        godzina;
+  int        dzien;
+}Zapis;
+
 #endif /* !SYMULATOR_H */

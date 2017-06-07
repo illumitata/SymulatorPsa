@@ -137,7 +137,7 @@ int menu(struct Pupil* pies){
           return 1;
           break;
       case 2:
-          pies = wczytajGre(pies);
+          wczytajGre(pies, 0, 0);
           return 2;
           break;
       case 3:

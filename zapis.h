@@ -8,9 +8,8 @@
 #include "symulator.h"
 #include "zapis.h"
 
-
-
 void zapiszGre(struct Pupil* pies,int dzien,int godzina);
-struct Pupil* wczytajGre(struct Pupil* pies);
+
+struct Pupil* wczytajGre(struct Pupil* pies, int dzien, int godzina);
 
 #endif /*ZAPIS_H*/

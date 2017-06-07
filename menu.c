@@ -115,8 +115,35 @@ int menu(struct Pupil* pies, struct Zapis* zapis){
       wyborMenu = getche();
 
       if(wyborMenu==10){                          //jeśli ENTER zatwierdza wybór i czyści
-        sygnalMenu = 1;
         wyborMenu  = '\0';
+
+        switch(decyzja){
+            case 1:
+                fflush(stdin);
+                stworzPsa(pies);
+                sygnalMenu = 1;
+                return 1;
+                break;
+            case 2:
+                fflush(stdin);
+                wczytajGre(zapis);
+                if(zapis->puste == 0){
+                  sygnalMenu = 1;
+                  return 2;
+                }
+                break;
+            case 4:
+                free(pies);
+                free(zapis);
+                sygnalMenu = 1;
+                exit(1);                  //zabija program
+                break;
+            case 3:
+                menuInstrukcje();
+                break;
+            default:
+                break;
+        }
       }
 
       if(wyborMenu == 27){
@@ -128,33 +155,6 @@ int menu(struct Pupil* pies, struct Zapis* zapis){
         }
       }
       else wyborMenu = '\0';
-  }
-
-  switch(decyzja){
-      case 1:
-          fflush(stdin);
-          stworzPsa(pies);
-          return 1;
-          break;
-      case 2:
-          fflush(stdin);
-          wczytajGre(zapis);
-          return 2;
-          break;
-      case 3:
-          menuInstrukcje();
-          menu(pies, zapis);
-          break;
-          /*tutaj nie było breaka i double menu, KOMPLETNIE NIEPOTRZEBNIE
-          więc struktura po wyświetleniu pomocy się psuła*/
-      case 4:
-          free(pies);
-          free(zapis);
-          exit(1);                  //zabija program
-          break;
-      default:                      //nie powinno się zdarzyć ale na wszelki wypadek
-          menu(pies, zapis);
-          break;
   }
 
   system("clear");

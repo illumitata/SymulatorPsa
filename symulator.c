@@ -12,8 +12,13 @@
 #include "menu.h"         //drukowanie menu startowego i innych statycznych elementów
 #include "logika.h"       //logika całej gry, zestaw warunków
 #include "komendy.h"      //działania na rzecz zwierzaka
+<<<<<<< HEAD
 #include "losowanie.h"    //ułatwienie dla ziaren i losowania
 #include "zapis.h"        //zapisywanie gry
+=======
+#include "losowanie.h"
+#include "zapis.h"    //ułatwienie dla ziaren i losowania
+>>>>>>> master
 
 //////////
 static int  szybkosc = 50000;  //szybkość odświeżania
@@ -176,6 +181,7 @@ int main(void){
       printf("\n\t\t       Opiekowałeś się psem przez %d dni i %d godzin.\n", dzien, godzina);
       printf("\n\t\t %s został zapisany, możesz wrócić do niego kiedy chesz.\n", pies->imie);
       printf("\n\t\t       (Naciśnij dowolny przycisk, żeby wyjść z gry)\n");
+      zapiszGre(pies,dzien,godzina);
       break;
       default:
       printf("Zepsułeś program brawo. :)\n");

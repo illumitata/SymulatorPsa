@@ -189,6 +189,7 @@ int main(void){
       printf("\n\t\t  Opiekowałeś się psem przez %d dni i %d godzin.\n", dzien, godzina);
       printf("\n\t\t            Niestety zaniedbałeś go.\n");
       printf("\n\t\t (Naciśnij dowolny przycisk, żeby wyjść z gry)\n");
+      remove("zapis/zapis.txt");
       break;
       case 2:
       printf("\n\t\t       Opiekowałeś się psem przez %d dni i %d godzin.\n", dzien, godzina);

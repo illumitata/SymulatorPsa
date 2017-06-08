@@ -114,7 +114,7 @@ int menu(struct Pupil* pies, struct Zapis* zapis){
 
       wyborMenu = getche();
 
-      if(wyborMenu==10){                          //jeśli ENTER zatwierdza wybór i czyści
+      if(wyborMenu==10){                                  //jeśli ENTER zatwierdza wybór i czyści
         wyborMenu  = '\0';
 
         switch(decyzja){

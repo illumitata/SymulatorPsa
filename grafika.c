@@ -107,7 +107,7 @@ void wczytajDoTablic(){
 }
 
 void drukujCzesc(char tab[]){
-                                          //czy można ulepszyć. printf("%s", tab) musi mieć 0 na końcu
+
     printf("%s", tab);
 
   return;

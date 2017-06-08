@@ -14,8 +14,8 @@
 #include "komendy.h"      //działania na rzecz zwierzaka
 #include "losowanie.h"    //ułatwienie dla ziaren i losowania
 #include "zapis.h"        //zapisywanie gry
-#include "losowanie.h"
-#include "zapis.h"    //ułatwienie dla ziaren i losowania
+#include "losowanie.h"    //ułatwienie dla ziaren i losowania
+#include "zapis.h"
 
 //////////
 static int  szybkosc = 50000;  //szybkość odświeżania
@@ -112,12 +112,13 @@ int main(void){
       szybkosc = szybkosctmp;         //podstawiamy stare tępo po wcześniejszym przyspieszeniu go
 
       system("clear");
-      printf("%s... Dzień: %d Godzina: %d:00\n", pies->imie, dzien, godzina);
+      printf("%s Dzień: %d Godzina: %d:00\n", pies->imie, dzien, godzina);
+/*
       printf("%d\n", pies->glod);
       printf("%d\n", pies->prag);
       printf("%d\n", pies->zado);
       printf("%d\n", pies->zdro);
-
+*/
       if(sygnal==1){
         if(pozycja==1){
                         dajJesc(pies);    //nakarm - 1
